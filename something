@@ -1,0 +1,34 @@
+	1. In case of network connection error, make sure you have added "nameserver 8.8.8.8" to /etc/resolv.conf
+	
+	2. sudo apt update && sudo apt upgrade
+	
+	3. sudo apt install -y python3-pip python3.10-venv make build-essential libssl-dev zlib1g-dev \
+	libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
+	libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl \
+	git
+	
+	4. curl https://pyenv.run | bash
+
+Add pyenv directory to your path
+	5. echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
+exec $SHELL
+	
+Install Python 3.11.4
+	6. pyenv install 3.11.4
+
+Install pipx
+	7. python3 -m pip install --user pipx
+	python3 -m pipx ensurepath
+	(NOW CLOSE AND REOPEN YOUR TERMINAL)
+
+Install azure-cli with pipx
+	8. pipx install azure-cli
+
+Install kubectl
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256" 
+echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
